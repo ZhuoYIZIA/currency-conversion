@@ -48,7 +48,7 @@ class CurrencyConversionService
      * 
      * @return string 轉換後的格式
      */
-    public function format(float $amount): string
+    private function format(float $amount): string
     {
         return number_format($amount, 2);
     }
