@@ -4,11 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use App\Trait\RequestTrait;
+use App\Trait\ResponseTrait;
 
 class CurrencyConversionRequest extends FormRequest
 {
-    use RequestTrait;
+    use ResponseTrait;
 
     /**
      * Indicates whether validation should stop after the first rule failure.
@@ -43,10 +43,11 @@ class CurrencyConversionRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $this->error(
+        $this->sendResponse(
             $validator->errors()->first(),
             null,
-            422
+            422,
+            false
         );
     }
 }

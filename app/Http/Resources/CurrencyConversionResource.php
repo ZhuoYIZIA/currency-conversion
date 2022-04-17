@@ -21,9 +21,4 @@ class CurrencyConversionResource extends JsonResource
             'amount' => $this['amount']
         ];
     }
-
-    public function toResponse($request)
-    {
-        return parent::toResponse($request)->setStatusCode(200);
-    }
 }
