@@ -11,7 +11,7 @@ use Mockery\MockInterface;
 class ConversionTest extends TestCase
 {
     /**
-     * test currency conversion
+     * 測試轉換費率 API OK
      */
     public function test_currency_conversion_ok()
     {
