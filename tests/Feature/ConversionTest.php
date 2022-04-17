@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Repositories\ExchangeRateRepository;
+use App\Services\ExchangeRateService;
 use Mockery\MockInterface;
 
 class ConversionTest extends TestCase
@@ -15,18 +15,19 @@ class ConversionTest extends TestCase
      */
     public function test_currency_conversion_ok()
     {
-        $this->mock(ExchangeRateRepository::class, function (MockInterface $mock) {
-            $mock->shouldReceive('getRate')
+        $this->mock(ExchangeRateService::class, function (MockInterface $mock) {
+            $mock->shouldReceive('getRatio')
                  ->once()
-                 ->andReturn($this->rate());
+                 ->andReturn($this->getRatio());
         });
 
-        $param = [
+        $apiParam = [
             'from' => 'TWD',
             'to' => 'JPY',
-            'amount' => 1000,
+            'amount' => 1000
         ];
-        $response = $this->call('GET', '/api/conversion', $param);
+        
+        $response = $this->call('GET', '/api/conversion', $apiParam);
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -41,12 +42,11 @@ class ConversionTest extends TestCase
     /**
      * 匯率
      * 
-     * @return object 各幣別匯率
+     * @return float 匯率
      */
-    private function rate(): object
+    private function getRatio(): float
     {
-        $rate = json_decode('{"currencies": {"TWD": {"TWD": 1,"JPY": 3.669}}}');
-        return $rate->currencies;
+        return 3.669;
     }
 
     /**

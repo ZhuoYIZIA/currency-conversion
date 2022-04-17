@@ -17,15 +17,15 @@ Controller 只需要負責與 Service 溝通，其他事情交給 Service 做即
     - 驗證 amount 欄位 required|integer
 
 ## Services
-負責轉換匯率，以及輸出的格式。
+負責取得、轉換匯率，以及輸出的格式。
 - App\Services\CurrencyConversionService
     - [method] convert - 轉換匯率
     - [method] format  - 轉換格式
+- App\Services\ExchangeRateService
+    - [method] getRatio - 取得匯率
 
 ## Repositories
-負責取得匯率，如要改成串接第三方的匯率可以直接替換
-- App\Repositories\ExchangeRateRepository
-    - [method] getRate - 取得匯率
+負責資料庫溝通。
 
 ## Exception
 Service 或 Repository 可以丟出特定的 exception，最後在 Controller 進行 try catch。
@@ -42,3 +42,5 @@ Service 或 Repository 可以丟出特定的 exception，最後在 Controller �
 ```
 
 ## Tests
+- API test
+    - test_currency_conversion
