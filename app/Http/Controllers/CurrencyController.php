@@ -29,18 +29,28 @@ class CurrencyController extends Controller
      */
     public function conversion(CurrencyConversionRequest $request)
     {
-        $requestData = $request->only(['from', 'to', 'amount']);
-            
-        $amount = $this->currencyConversionService->convert(
-            $requestData['from'],
-            $requestData['to'],
-            $requestData['amount']
-        );
-
-        return $this->sendSuccessResponse(
-            'successfully',
-            new CurrencyConversionResource(compact('amount')),
-            200
-        );
+        try {
+            $requestData = $request->only(['from', 'to', 'amount']);
+                
+            $amount = $this->currencyConversionService->convert(
+                $requestData['from'],
+                $requestData['to'],
+                $requestData['amount']
+            );
+    
+            return $this->sendResponse(
+                'successfully',
+                new CurrencyConversionResource(compact('amount')),
+                200,
+                true
+            );
+        } catch (Throwable $e) {
+            return $this->sendResponse(
+                $e->getMessage(),
+                null,
+                $e->getCode(),
+                false
+            );
+        }
     }
 }

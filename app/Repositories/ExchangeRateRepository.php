@@ -11,7 +11,7 @@ class ExchangeRateRepository
      */
     public function getRate(): object
     {
-        return $this->rate();
+        return $this->rate() ?? [];
     }
 
     /**
