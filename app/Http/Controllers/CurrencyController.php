@@ -14,7 +14,14 @@ class CurrencyController extends Controller
 {
     use ResponseTrait;
 
+    /**
+     * 匯率轉換 service
+     */
     private $currencyConversionService;
+
+    /**
+     * 取得匯率 service
+     */
     private $exchangeRateService;
 
     public function __construct(

@@ -6,6 +6,9 @@ use App\Exceptions\ConversionExcaption;
 
 class ExchangeRateService
 {
+    /**
+     * 貨幣轉換 exception
+     */
     private $conversionExcaption;
 
     public function __construct(ConversionExcaption $conversionExcaption)
