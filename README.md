@@ -1,10 +1,11 @@
 # Currency Conversion
-版本資訊：
-Laravel : 9
-PHP     : 8
+版本資訊：<br>
+Laravel : 9<br>
+PHP     : 8<br>
 此 project 為實作匯率轉換，
 使用 Repository Pattern and Service Layer 進行實作，
-Controller 只需要負責與 Service 溝通，其他事情交給 Service 做即可。
+Controller 只需要負責與 Service 溝通，其他事情交給 Service 做即可，
+Repository 則負責存放 Model 取資料的邏輯。
 
 ## API
 - [GET] api/conversion 轉換匯率 API
