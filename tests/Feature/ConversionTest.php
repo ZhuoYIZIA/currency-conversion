@@ -5,22 +5,48 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Repositories\ExchangeRateRepository;
+use Mockery\MockInterface;
 
 class ConversionTest extends TestCase
 {
     /**
      * test currency conversion
      */
-    public function test_currency_conversion()
+    public function test_currency_conversion_ok()
     {
+        $this->mock(ExchangeRateRepository::class, function (MockInterface $mock) {
+            $mock->shouldReceive('getRate')
+                 ->once()
+                 ->andReturn($this->rate());
+        });
+
         $param = [
             'from' => 'TWD',
-            'to' => 'USD',
-            'amount' => 10099,
+            'to' => 'JPY',
+            'amount' => 1000,
         ];
         $response = $this->call('GET', '/api/conversion', $param);
 
         $response->assertStatus(200);
+        $response->assertJson([
+            'status' => true,
+            'message' => 'successfully',
+            'data' => [
+                'amount' => '3,669.00'
+            ]
+        ]);
+    }
+
+    /**
+     * 匯率
+     * 
+     * @return object 各幣別匯率
+     */
+    private function rate(): object
+    {
+        $rate = json_decode('{"currencies": {"TWD": {"TWD": 1,"JPY": 3.669}}}');
+        return $rate->currencies;
     }
 
     /**
