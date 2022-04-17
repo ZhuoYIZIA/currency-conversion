@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use App\Trait\ResponseTrait;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CurrencyConversionRequest extends FormRequest
 {
@@ -43,11 +44,11 @@ class CurrencyConversionRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $this->sendResponse(
+        throw new HttpResponseException($this->sendResponse(
             $validator->errors()->first(),
             null,
             422,
             false
-        );
+        ));
     }
 }
