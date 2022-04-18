@@ -46,9 +46,9 @@ class CurrencyController extends Controller
             );
 
             $responseData = [
-                'from' => $requestData['from'],
-                'to' => $requestData['to'],
-                'amount' => $requestData['amount'],
+                'from'             => $requestData['from'],
+                'to'               => $requestData['to'],
+                'amount'           => $requestData['amount'],
                 'conversionAmount' => $amount,
             ];
     
