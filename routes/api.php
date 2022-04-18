@@ -16,5 +16,5 @@ use App\Http\Controllers\CurrencyController;
 */
 
 Route::middleware(['throttle:api'])->group(function () {
-    Route::get('conversion', [CurrencyController::class, 'conversion']);
+    Route::get('currency_conversion', [CurrencyController::class, 'conversion']);
 });
