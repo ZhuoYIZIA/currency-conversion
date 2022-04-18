@@ -6,7 +6,6 @@ use Throwable;
 use Illuminate\Http\Request;
 use App\Http\Requests\CurrencyConversionRequest;
 use App\Services\CurrencyConversionService;
-use App\Services\ExchangeRateService;
 use App\Http\Resources\CurrencyConversionResource;
 use App\Trait\ResponseTrait;
 
@@ -19,17 +18,9 @@ class CurrencyController extends Controller
      */
     private $currencyConversionService;
 
-    /**
-     * 取得匯率 service
-     */
-    private $exchangeRateService;
-
-    public function __construct(
-        CurrencyConversionService $currencyConversionService,
-        ExchangeRateService $exchangeRateService
-    ){
+    public function __construct(CurrencyConversionService $currencyConversionService)
+    {
         $this->currencyConversionService = $currencyConversionService;
-        $this->exchangeRateService = $exchangeRateService;
     }
 
     /**
@@ -44,7 +35,7 @@ class CurrencyController extends Controller
         try {
             $requestData = $request->only(['from', 'to', 'amount']);
                 
-            $ratio = $this->exchangeRateService->getRatio(
+            $ratio = $this->currencyConversionService->getRatio(
                 $requestData['from'], 
                 $requestData['to']
             );

@@ -15,14 +15,12 @@ Repository 則負責存放 Model 取資料的邏輯。
 - App\Http\Requests\CurrencyConversionRequest
     - 驗證 from   欄位 required|string
     - 驗證 to     欄位 required|string
-    - 驗證 amount 欄位 required|integer
+    - 驗證 amount 欄位 required|numeric|min:0
 
 ## Services
 負責取得、轉換匯率，以及輸出的格式。
 - App\Services\CurrencyConversionService
     - [method] convert - 轉換匯率
-    - [method] format  - 轉換格式
-- App\Services\ExchangeRateService
     - [method] getRatio - 取得匯率
 
 ## Repositories

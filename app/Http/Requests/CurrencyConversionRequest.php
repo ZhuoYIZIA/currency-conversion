@@ -38,7 +38,7 @@ class CurrencyConversionRequest extends FormRequest
         return [
             'from'   => 'required|string',
             'to'     => 'required|string',
-            'amount' => 'required|integer',
+            'amount' => 'required|numeric|min:0',
         ];
     }
 
