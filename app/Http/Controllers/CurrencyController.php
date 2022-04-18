@@ -44,10 +44,17 @@ class CurrencyController extends Controller
                 $requestData['amount'],
                 $ratio
             );
+
+            $responseData = [
+                'from' => $requestData['from'],
+                'to' => $requestData['to'],
+                'amount' => $requestData['amount'],
+                'conversionAmount' => $amount,
+            ];
     
             return $this->sendResponse(
                 'successfully',
-                new CurrencyConversionResource(compact('amount')),
+                new CurrencyConversionResource($responseData),
                 200,
                 true
             );

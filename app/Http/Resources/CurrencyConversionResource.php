@@ -18,7 +18,10 @@ class CurrencyConversionResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'amount' => $this['amount']
+            'from' => $this['from'],
+            'to' => $this['to'],
+            'amount' => $this['amount'],
+            'conversionAmount' => $this['conversionAmount'],
         ];
     }
 }
