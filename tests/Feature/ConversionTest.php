@@ -10,6 +10,8 @@ use Mockery\MockInterface;
 
 class ConversionTest extends TestCase
 {
+    private $currency_conversion_endpoint = '/api/currency_conversion';
+
     /**
      * 測試轉換費率 API OK
      */
@@ -27,7 +29,7 @@ class ConversionTest extends TestCase
             'amount' => 1000
         ];
         
-        $response = $this->call('GET', '/api/currency_conversion', $apiParam);
+        $response = $this->call('GET', $this->currency_conversion_endpoint, $apiParam);
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -61,7 +63,7 @@ class ConversionTest extends TestCase
             'to' => $to,
             'amount' => $amount,
         ];
-        $response = $this->call('GET', '/api/conversion', $param);
+        $response = $this->call('GET', $this->currency_conversion_endpoint, $param);
 
         $response->assertStatus(422);
         
@@ -102,7 +104,7 @@ class ConversionTest extends TestCase
             'to' => $to,
             'amount' => 10000,
         ];
-        $response = $this->call('GET', '/api/conversion', $param);
+        $response = $this->call('GET', $this->currency_conversion_endpoint, $param);
 
         $response->assertStatus(400);
         
