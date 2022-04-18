@@ -32,7 +32,7 @@ Repository 則負責存放 Model 取資料的邏輯。
 ## Services
 負責取得、轉換匯率，以及輸出的格式。
 - App\Services\CurrencyConversionService
-    - [method] convert - 轉換匯率
+    - [method] convert  - 轉換匯率
     - [method] getRatio - 取得匯率
 
 ## Repositories
