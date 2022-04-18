@@ -4,7 +4,6 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Services\CurrencyConversionService;
-use App\Exceptions\ConversionExcaption;
 
 class CurrencyConversionTest extends TestCase
 {
