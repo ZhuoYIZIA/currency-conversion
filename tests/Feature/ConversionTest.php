@@ -3,7 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Services\ExchangeRateService;
+use App\Services\CurrencyConversionService;
+use Mockery;
 use Mockery\MockInterface;
 
 class ConversionTest extends TestCase
@@ -15,15 +16,13 @@ class ConversionTest extends TestCase
      */
     public function test_currency_conversion_ok()
     {
-        $this->mock(ExchangeRateService::class, function (MockInterface $mock) {
-            $mock->shouldReceive('getRatio')
-                 ->once()
-                 ->andReturn($this->getRatio());
+        $mock = $this->partialMock(CurrencyConversionService::class, function (MockInterface $mock) {
+            $mock->shouldReceive('getRatio')->once()->andReturn($this->getRatio());
         });
 
         $apiParam = [
-            'from' => 'TWD',
-            'to' => 'JPY',
+            'from'   => 'TWD',
+            'to'     => 'JPY',
             'amount' => 1000
         ];
         
@@ -31,10 +30,13 @@ class ConversionTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJson([
-            'status' => true,
+            'status'  => true,
             'message' => 'successfully',
-            'data' => [
-                'amount' => '3,669.00'
+            'data'    => [
+                "from"             => "TWD",
+                "to"               => "JPY",
+                "amount"           => "1000",
+                "conversionAmount" => "3,669.00"
             ]
         ]);
     }
@@ -44,7 +46,7 @@ class ConversionTest extends TestCase
      * 
      * @return float 匯率
      */
-    private function getRatio(): float
+    public function getRatio(): float
     {
         return 3.669;
     }
@@ -57,8 +59,8 @@ class ConversionTest extends TestCase
     public function test_currency_conversion_validator($from, $to, $amount)
     {
         $param = [
-            'from' => $from,
-            'to' => $to,
+            'from'   => $from,
+            'to'     => $to,
             'amount' => $amount,
         ];
         $response = $this->call('GET', $this->currency_conversion_endpoint, $param);
@@ -98,8 +100,8 @@ class ConversionTest extends TestCase
     public function test_currency_not_found($from, $to)
     {
         $param = [
-            'from' => $from,
-            'to' => $to,
+            'from'   => $from,
+            'to'     => $to,
             'amount' => 10000,
         ];
         $response = $this->call('GET', $this->currency_conversion_endpoint, $param);
