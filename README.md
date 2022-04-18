@@ -1,7 +1,7 @@
 # Currency Conversion
-版本資訊：<br>
-Laravel : 9<br>
-PHP     : 8<br>
+版本資訊<br>
+Laravel : 9.2<br>
+PHP     : 8.1.4<br>
 此 project 為實作匯率轉換，
 使用 Repository Pattern and Service Layer 進行實作，
 Controller 只需要負責與 Service 溝通，其他事情交給 Service 做即可，
