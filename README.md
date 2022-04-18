@@ -9,6 +9,18 @@ Repository 則負責存放 Model 取資料的邏輯。
 
 ## API
 - [GET] api/conversion 轉換匯率 API
+```json
+{
+    "status": true,
+    "message": "successfully",
+    "data": {
+        "from": "TWD",
+        "to": "JPY",
+        "amount": "1000",
+        "conversionAmount": "3,669.00"
+    }
+}
+```
 
 ## Validator
 負責驗證 request 的值。
