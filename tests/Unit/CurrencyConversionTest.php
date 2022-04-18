@@ -8,13 +8,20 @@ use App\Exceptions\ConversionExcaption;
 
 class CurrencyConversionTest extends TestCase
 {
+    private $currencyConversionService;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->currencyConversionService = app(CurrencyConversionService::class);
+    }
+
     /**
      * 測試匯率轉換
      */
     public function test_currency_conversion_convert()
     {
-        $currencyConversionService = new CurrencyConversionService(new ConversionExcaption);
-        $amount = $currencyConversionService->convert(1000, $this->getRatio());
+        $amount = $this->currencyConversionService->convert(1000, $this->getRatio());
 
         $this->assertTrue($amount === '3,669.00');
     }

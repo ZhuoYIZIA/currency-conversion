@@ -27,7 +27,7 @@ class ConversionTest extends TestCase
             'amount' => 1000
         ];
         
-        $response = $this->call('GET', '/api/conversion', $apiParam);
+        $response = $this->call('GET', '/api/currency_conversion', $apiParam);
 
         $response->assertStatus(200);
         $response->assertJson([
