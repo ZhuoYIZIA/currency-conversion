@@ -43,7 +43,7 @@ Service 或 Repository 可以丟出特定的 exception，最後在 Controller �
 ```
 
 ## Tests
-測試 API 時將 getRatio mock 起來，避免取得匯率問題影響測試（假設獲取來源為第三方），
+測試 API 時將 getRatio, ratio mock 起來，避免取得匯率問題影響測試（假設獲取來源為第三方），
 並且使用 dataProvider 將 API 的各種錯誤測試過一次。
 - tests\Feature\ConversionTest
 - tests\Unit\CurrencyConversionTest
